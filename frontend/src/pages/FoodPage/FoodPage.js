@@ -7,15 +7,17 @@ import Tags from '../../components/Tags/Tags';
 import { getById } from '../../services/foodService';
 import classes from './foodPage.module.css';
 import NotFound from '../../components/NotFound/NotFound';
+import { useCart } from '../../hooks/useCart';
 export default function FoodPage() {
   const [food, setFood] = useState({});
   const { id } = useParams();
+  const {addToCart}=useCart();
   //const { addToCart } = useCart();
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    // addToCart(food);
-    // navigate('/cart');
+    addToCart(food);
+    navigate('/cart');
   };
 
   useEffect(() => {
