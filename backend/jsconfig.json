@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node"
+    },
+    "include": ["src"]
+}
+//resolve the module as node type which are the present in the src folder

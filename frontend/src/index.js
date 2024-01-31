@@ -5,7 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import CartProvider from './hooks/useCart';
+import './axiosConfig';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
