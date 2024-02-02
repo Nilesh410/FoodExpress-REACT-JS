@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { sample_users } from '../data.js';
 import jwt from 'jsonwebtoken';
 import { BAD_REQUEST } from "../constants/httpStatus.js";
 const router=Router();
