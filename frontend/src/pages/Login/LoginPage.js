@@ -55,12 +55,12 @@ export default function LoginPage() {
 
           <Button type="submit" text="Login" />
 
-          {/* <div className={classes.register}>
+          <div className={classes.register}>
             New user? &nbsp;
             <Link to={`/register${returnUrl ? '?returnUrl=' + returnUrl : ''}`}>
               Register here
             </Link>
-          </div> */}
+          </div>
         </form>
       </div>
     </div>
