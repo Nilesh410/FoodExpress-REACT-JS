@@ -10,7 +10,7 @@ import classes from './checkoutPage.module.css';
 import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
-//import OrderItemsList from '../../components/OrderItemsList/OrderItemsList';
+import OrderItemsList from '../../components/OrderItemsList/OrderItemsList';
 //import Map from '../../components/Map/Map';
 export default function CheckoutPage() {
   const { cart } = useCart();
@@ -53,7 +53,7 @@ export default function CheckoutPage() {
               error={errors.address}
             />
           </div>
-          {/* <OrderItemsList order={order} /> */}
+          <OrderItemsList order={order} />
         </div>
         <div>
           <Title title="Choose Your Location" fontSize="1.6rem" />
