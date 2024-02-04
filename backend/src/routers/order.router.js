@@ -28,25 +28,25 @@ router.post(
   })
 );
 
-// router.put(
-//   '/pay',
-//   handler(async (req, res) => {
-//     const { paymentId } = req.body;
-//     const order = await getNewOrderForCurrentUser(req);
-//     if (!order) {
-//       res.status(BAD_REQUEST).send('Order Not Found!');
-//       return;
-//     }
+router.put(
+  '/pay',
+  handler(async (req, res) => {
+    const { paymentId } = req.body;
+    const order = await getNewOrderForCurrentUser(req);
+    if (!order) {
+      res.status(BAD_REQUEST).send('Order Not Found!');
+      return;
+    }
 
-//     order.paymentId = paymentId;
-//     order.status = OrderStatus.PAYED;
-//     await order.save();
+    order.paymentId = paymentId;
+    order.status = OrderStatus.PAYED;
+    await order.save();
 
-//     sendEmailReceipt(order);
+    // sendEmailReceipt(order);
 
-//     res.send(order._id);
-//   })
-// );
+    res.send(order._id);
+  })
+);
 
 // router.get(
 //   '/track/:orderId',
@@ -70,14 +70,14 @@ router.post(
 //   })
 // );
 
-// router.get(
-//   '/newOrderForCurrentUser',
-//   handler(async (req, res) => {
-//     const order = await getNewOrderForCurrentUser(req);
-//     if (order) res.send(order);
-//     else res.status(BAD_REQUEST).send();
-//   })
-// );
+router.get(
+  '/newOrderForCurrentUser',
+  handler(async (req, res) => {
+    const order = await getNewOrderForCurrentUser(req);
+    if (order) res.send(order);
+    else res.status(BAD_REQUEST).send();
+  })
+);
 
 // router.get('/allstatus', (req, res) => {
 //   const allStatus = Object.values(OrderStatus);
@@ -99,9 +99,9 @@ router.post(
 //   })
 // );
 
-// const getNewOrderForCurrentUser = async req =>
-//   await OrderModel.findOne({
-//     user: req.user.id,
-//     status: OrderStatus.NEW,
-//   }).populate('user');
+const getNewOrderForCurrentUser = async req =>
+  await OrderModel.findOne({
+    user: req.user.id,
+    status: OrderStatus.NEW,
+  }).populate('user');
 export default router;
