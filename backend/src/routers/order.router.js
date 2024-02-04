@@ -5,6 +5,7 @@ import { BAD_REQUEST } from '../constants/httpStatus.js';
 import { OrderModel } from '../models/order.model.js';
 import { OrderStatus } from '../constants/orderStatus.js';
 import { UserModel } from '../models/user.model.js';
+import { UNAUTHORIZED } from '../constants/httpStatus.js';
 //import { sendEmailReceipt } from '../helpers/mail.helper.js';
 
 const router = Router();
@@ -48,27 +49,27 @@ router.put(
   })
 );
 
-// router.get(
-//   '/track/:orderId',
-//   handler(async (req, res) => {
-//     const { orderId } = req.params;
-//     const user = await UserModel.findById(req.user.id);
+router.get(
+  '/track/:orderId',
+  handler(async (req, res) => {
+    const { orderId } = req.params;
+    const user = await UserModel.findById(req.user.id);
 
-//     const filter = {
-//       _id: orderId,
-//     };
+    const filter = {
+      _id: orderId,
+    };
 
-//     if (!user.isAdmin) {
-//       filter.user = user._id;
-//     }
+    if (!user.isAdmin) {
+      filter.user = user._id;
+    }
 
-//     const order = await OrderModel.findOne(filter);
+    const order = await OrderModel.findOne(filter);
 
-//     if (!order) return res.send(UNAUTHORIZED);
+    if (!order) return res.sendStatus(UNAUTHORIZED);
 
-//     return res.send(order);
-//   })
-// );
+    return res.send(order);
+  })
+);
 
 router.get(
   '/newOrderForCurrentUser',
@@ -79,25 +80,25 @@ router.get(
   })
 );
 
-// router.get('/allstatus', (req, res) => {
-//   const allStatus = Object.values(OrderStatus);
-//   res.send(allStatus);
-// });
+router.get('/allstatus', (req, res) => {
+  const allStatus = Object.values(OrderStatus);
+  res.send(allStatus);
+});
 
-// router.get(
-//   '/:status?',
-//   handler(async (req, res) => {
-//     const status = req.params.status;
-//     const user = await UserModel.findById(req.user.id);
-//     const filter = {};
+router.get(
+  '/:status?',
+  handler(async (req, res) => {
+    const status = req.params.status;
+    const user = await UserModel.findById(req.user.id);
+    const filter = {};
 
-//     if (!user.isAdmin) filter.user = user._id;
-//     if (status) filter.status = status;
+    if (!user.isAdmin) filter.user = user._id;
+    if (status) filter.status = status;
 
-//     const orders = await OrderModel.find(filter).sort('-createdAt');
-//     res.send(orders);
-//   })
-// );
+    const orders = await OrderModel.find(filter).sort('-createdAt');
+    res.send(orders);
+  })
+);
 
 const getNewOrderForCurrentUser = async req =>
   await OrderModel.findOne({
