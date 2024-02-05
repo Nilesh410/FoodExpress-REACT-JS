@@ -62,6 +62,14 @@ export default function AppRoutes() {
               </AuthRoute>
               }
             />
+             <Route
+              path="/dashboard"
+              element={
+                <AuthRoute>
+                  <Dashboard />
+                </AuthRoute>
+              }
+            />
     </Routes>
   );
 }
